@@ -1,0 +1,12 @@
+from sys import stdin
+
+input = stdin.readline #input 변수에 stdin을 담음
+
+l = [input() for _ in range(int(input()))] #첫줄에 입력받은 수만큼 반복하여 입력 받음
+
+l.sort(key=lambda a: (int(a.split()[1]), int(a.split()[0]))) 
+#입력받은 수를 람다 표현식으로 기준을 정하고 정렬
+
+print("".join(l))
+#join으로 합친 리스트를 출력
+#입력받을 때 strip()을 쓰지 않았으므로 개행문자가 있어서 자동으로 줄바꿈돼서 출력
