@@ -1,0 +1,24 @@
+# n을 k진법으로 나타낸 문자열 반환
+def conv(n, k):
+    s = ''
+    while n: # n이 1 이상이면 반복 된다.
+        s += str(n%k)
+        n //= k
+    return s[::-1]
+
+# n이 소수인지 판정
+def isprime(n):
+    if n <= 1: return False # n이 1이하이면 소수x
+    i = 2
+    while i*i <= n: # i^2이 숫자 n보다 작거나 같으면, 2라면 실행 x, n의 제곱근까지 for문 도는 방식 대신 i의 제곱으로 비교 후 실행
+        if n%i == 0: return False # i*i의 제곱근인 i를 비교
+        i += 1
+    return True
+
+def solution(n, k):
+    s = conv(n,k)
+    cnt = 0
+    for num in s.split('0'):
+        if not num: continue # 빈 문자열에 대한 예외처리
+        if isprime(int(num)): cnt += 1
+    return cnt
