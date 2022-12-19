@@ -1,0 +1,16 @@
+def solution(s):
+    answer = []
+    dic = dict()
+    for i in range(len(s)):
+        if s[i] not in dic:
+            answer.append(-1)
+        else:
+            answer.append(i - dic[s[i]])
+        dic[s[i]] = i
+
+    return answer
+
+# 딕셔너리 key-value 를 이용
+# 딕셔너리에 key s[i]가 없다면 -1를 출력
+# key s[i] 의 value를 문자의 인덱스 i의 값으로 지정
+# 딕셔너리에 key s[i]의 값이 있다면 현재 문자의 인덱스인 i에서 dic[s[i]]뺀 값을 answer에 담는다.
