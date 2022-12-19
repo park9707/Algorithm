@@ -1,0 +1,19 @@
+from math import gcd
+from functools import reduce
+
+def check(arrayA, arrayB):
+    gcd_A = reduce(gcd, arrayA, arrayA[0]) # reduce사용, gcd 함수로 arrayA 돌며 최대공약수 찾기
+    
+    factors = [i for i in range(1, gcd_A//2+1) if not gcd_A % i] 
+    # 최대공약수의 절반까지 공약수가 될 수 없으므로 1부터 절반까지 돌며 나눈 나머지가 0이 아닌 값을 담는다.
+    
+    factors.append(gcd_A)
+    for factor in factors[::-1]: # 큰 값부터 반복하며
+        if all(i % factor for i in arrayB): 
+            return gcd_A
+	#arrayB의 값들을 하나씩 꺼내어 gcd_A로 나눠보고 0이 아니면 gcd_A를 반환
+    
+    return 0
+
+def solution(arrayA, arrayB):
+    return max(check(arrayA, arrayB), check(arrayB, arrayA))
