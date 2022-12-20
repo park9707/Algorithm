@@ -1,0 +1,11 @@
+import collections
+def solution(k, tangerine):
+    answer = 0
+    cnt = collections.Counter(tangerine) # 각 원소가 몇 번씩 나오는지 세서 딕셔너리로 만드는 함수
+
+    for v in sorted(cnt.values(), reverse = True): # 딕셔너리의 value값만 내림차순으로 정렬
+        k -= v
+        answer += 1
+        if k <= 0:
+            break # 개수를 다 채웠다면 반복문 종료
+    return answer
