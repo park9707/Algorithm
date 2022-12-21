@@ -1,0 +1,5 @@
+def getMinSum(A,B):
+    return sum(a*b for a, b in zip(sorted(A), sorted(B, reverse = True)))
+	# A를 오름차순, B를 내림차순으로 정렬 후 a b에 각각 넘기고 곱한 값들을 sum으로 더한다.
+
+print(getMinSum([1,2],[3,4]))
