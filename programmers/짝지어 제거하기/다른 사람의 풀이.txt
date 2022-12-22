@@ -1,0 +1,11 @@
+def solution(s):
+    answer = []
+    for i in s:
+        if not(answer): # answer이 0이라면 비교할 것도 없이 i 추가
+            answer.append(i)
+        else:
+            if(answer[-1] == i): #answer의 가장 뒤쪽의 요소와 비교
+                answer.pop()
+            else:
+                answer.append(i)    
+    return not(answer)
