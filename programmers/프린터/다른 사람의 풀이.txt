@@ -1,0 +1,11 @@
+def solution(priorities, location):
+    queue =  [(i,p) for i,p in enumerate(priorities)] # 인덱스와 값을 뽑는다.
+    answer = 0
+    while True:
+        cur = queue.pop(0) # 첫 번째 값을 뽑아내어
+        if any(cur[1] < q[1] for q in queue): # cur의 값보다 하나라도 큰 값이 있다면
+            queue.append(cur) # 큐에 다시 추가
+        else:
+            answer += 1 # cur의 값보다 큰 값이 없다면 카운팅을 하고
+            if cur[0] == location: # 인덱스 값이 location 값과 같다면
+                return answer # 정답을 리턴
