@@ -1,7 +1,7 @@
 def solution(s):
 
     s = Counter(re.findall('\d+', s)) 
-# findall: 정규식과 매치되는 모든 문자열을 리스트로 리턴, \d -> 숫자와 매치, + -> 1부터 끝까지
+# findall: 정규식과 매치되는 모든 문자열을 리스트로 리턴, \d -> 숫자와 매치, + -> 1번 이상 반복된 것
 # Counter로 세서 딕셔너리 형태로 저장
     return list(map(int, [k for k, v in sorted(s.items(), key=lambda x: x[1], reverse=True)])) # 값을 기준으로 내림차순으로 정렬한 후 키 값을 리스트로 담아 리턴
 
