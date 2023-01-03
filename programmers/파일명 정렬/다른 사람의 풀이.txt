@@ -1,0 +1,8 @@
+import re
+
+def solution(files):
+    a = sorted(files, key=lambda file : int(re.findall('\d+', file)[0])) 
+    # 숫자인 것을 찾고 그것을 기준으로 출력
+    b = sorted(a, key=lambda file : re.split('\d+', file.lower())[0])
+    # 숫자를 기준으로 나눈 후 첫번째 영문을 소문자로 바꾼 것을 기준으로 정렬
+    return b
