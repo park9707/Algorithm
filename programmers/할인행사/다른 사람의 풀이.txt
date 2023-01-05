@@ -1,0 +1,13 @@
+from collections import Counter
+
+def solution(want, number, discount):
+    answer = 0
+    dic = {}
+    for i in range(len(want)):
+        dic[want[i]] = number[i] # 품목이 키, 개수가 값인 딕셔너리를 만듬 
+
+    for i in range(len(discount)-9): # 할인 품목 전부를 사야 하므로 최소 10개를 살 수 있는 날까지
+        if dic == Counter(discount[i:i+10]): # 10개의 돌며 중복된 값을 카운트하여 딕셔너리 형태로 저장
+            answer += 1
+
+    return answer
