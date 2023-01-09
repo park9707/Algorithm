@@ -1,0 +1,14 @@
+from itertools import permutations
+def solution(n):
+    a = set()
+
+    for i in range(len(n)):
+        a |= set(map(int, map("".join, permutations(list(n), i + 1))))
+	# n을 한 단어씩 리스트로 만든 것을 순열로 만듬, 만든 것을 set타입으로 만들고 a와의 합집합을 만든다.
+
+    a -= set(range(0, 2)) # 0과 1은 소수가 아니므로 제거
+
+    for i in range(2, int(max(a) ** 0.5) + 1): # 2부터 a의 제일 큰 수의 제곱근+1 까지 돌며
+        a -= set(range(i * 2, max(a) + 1, i)) # i의 배수부터는 소수가 아니므로 a에서 뺀다.
+
+    return len(a)
