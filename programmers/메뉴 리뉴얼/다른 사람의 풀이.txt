@@ -1,0 +1,20 @@
+import collections
+import itertools
+
+def solution(orders, course):
+    result = []
+
+    for course_size in course:
+        order_combinations = []
+        for order in orders:
+            order_combinations += itertools.combinations(sorted(order), course_size)
+		# 사이즈만큼 글자를 정렬 및 조합해서 리스트에 더한다.
+
+        most_ordered = collections.Counter(order_combinations).most_common()
+	# 카운팅하고 최빈값을 리스트에 담긴 튜플 형태로 저장한다.
+
+        result += [ k for k, v in most_ordered if v > 1 and v == most_ordered[0][1] ]
+	# value가 2 이상이고 가장 높은값과 같다면 결과에 추가
+
+    return [ ''.join(v) for v in sorted(result) ]
+	# 리스트 형태의 문자를 합쳐서 리스트에 담아 리턴
