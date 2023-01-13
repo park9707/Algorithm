@@ -1,0 +1,22 @@
+def shap_to_lower(s):
+    s = s.replace('C#','c').replace('D#','d').replace('F#','f').replace('G#','g').replace('A#','a') # '#'이 붙은 것은 소문자로 바꿔서 생각
+    return s
+
+def solution(m,musicinfos):
+    answer=[0,'(None)']   # 시간과 제목
+    m = shap_to_lower(m)
+    for info in musicinfos:
+        split_info = info.split(',')
+        time_length = (int(split_info[1][:2])-int(split_info[0][:2]))*60+int(split_info[1][-2:])-int(split_info[0][-2:]) 
+	# 시간을 빼고 60을 곱, 분을 계산해서 더한다.
+        
+	title = split_info[2] # 제목을 적어두고
+        part_notes = shap_to_lower(split_info[-1]) # 끝까지 돌며 '#'이 붙은 것 소문자로 변경
+        full_notes = part_notes*(time_length//len(part_notes))+part_notes[:time_length%len(part_notes)] 
+	# 악보 길이를 시간으로 나눈 값의 몫만큼 악보를 곱하고 나머지 만큼의 악보를 더한다.
+
+        if m in full_notes and time_length>answer[0]: 
+	# m이 악보에 포함되어 있고, 시간이 answer의 시간보다 길다면
+            
+		answer=[time_length,title] # 답에 시간과 제목을 넣는다.
+    return answer[-1]
