@@ -1,0 +1,28 @@
+uf = [] # uf 리스트 선언
+
+def find(a):
+    global uf # 밖에서 생성된 uf 액세스
+    if uf[a] < 0: return a # uf[a]가 0보다 작다면 a가 자신의 부모
+    uf[a] = find(uf[a]) # 재귀함수로 루트 노드 탐색후 변경
+    return uf[a] # 루트 노드를 리턴
+
+def merge(a, b):
+    global uf
+    pa = find(a) # a의 루트 노드 찾기
+    pb = find(b) # b의 루트 노드 찾기
+    if pa == pb: return # a와 b의 루트 노드가 같다면 합치지 않고 리턴
+    uf[pa] += uf[pb] # 하위 노드의 개수를 더한다. ex.(-1) + (-1)
+    uf[pb] = pa # uf[pb]에 루트 상위 노드의 인덱스 담는다.
+
+def solution(n, wires):
+    global uf
+    answer = int(1e9) # 10^9 값 담기(최댓값 표현)
+    k = len(wires)
+    for i in range(k): # 와이어의 수만큼 반복
+        uf = [-1 for _ in range(n+1)] # 송전탑의 수+1만큼 -1 생성
+        tmp = [wires[x] for x in range(k) if x != i] # 와이어를 하나 끊어서 담는다.
+        for a, b in tmp: merge(a, b) # 끊은 와이어 제외하고 담은 리스트를 불러와 합친다.
+        v = [x for x in uf[1:] if x < 0] # 루트 노드를 v에 담는다.
+        answer = min(answer, abs(v[0]-v[1])) # 절댓값을 씌워 비교후 작은 값을 담는다.
+
+    return answer
