@@ -32,7 +32,7 @@ def dfs(x, y, num):
 
 for num in range(1, max_num+1):
     cnt = 0
-    visited = [[False]*(n+1) for _ in range(n)]
+    visited = [[False] * (n+1) for _ in range(n)]
     for x in range(n):
         for y in range(n):
             if not visited[y][x] and graph[y][x] > num:
