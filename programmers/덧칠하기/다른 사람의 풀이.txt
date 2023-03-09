@@ -1,0 +1,9 @@
+def solution(n, m, section):
+    answer = 0
+    while len(section) > 0:  # 섹션이 남아 있으면 반복
+        temp = section[0] + m  # 섹션 첫번째 구역부터 롤의 길이만큼
+        while len(section) != 0 and temp > section[0]:  # 섹션의 길이가 남아있고, 섹션의 첫번째 구역 값이 temp보다 작다면
+            section.pop(0)  # 구역 색칠
+        answer += 1  # 칠이 끝나면 횟수 + 1
+
+    return answer
