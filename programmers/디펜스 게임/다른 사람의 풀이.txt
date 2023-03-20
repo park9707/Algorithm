@@ -1,0 +1,9 @@
+import heapq as hq
+def solution(n, k, enemy):
+    q = enemy[:k]  # 최소 k만큼 진행 할 수 있으니 리스트에 k만큼 숫자 넣기
+    hq.heapify(q)  # q를 힙으로 변환
+    for idx in range(k,len(enemy)):  # k 부터 끝까지 반복
+        n -= hq.heappushpop(q,enemy[idx])  # 적의 수를 힙에 넣고 최솟 값을 꺼내 n에서 뺀다.
+        if n < 0:  # 병사 수 보다 적이 더 많아 음수가 됐다면 여기까지 밖에 진행할 수 없다는 의미
+            return idx  # 인덱스 = 라운드-1 이므로 진행하지 못하는 라운드일 때 인덱스를 리턴하면 된다.
+    return len(enemy)
