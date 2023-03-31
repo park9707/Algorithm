@@ -3,11 +3,11 @@ from collections import deque, defaultdict
 
 def solution(n, edge):
     maps = [[] for _ in range(n + 1)]
-    arr = defaultdict(list)
     for a, b in edge:
         maps[a].append(b)
         maps[b].append(a)
 
+    arr = defaultdict(list)
     visited = [-1] * (n + 1)
     visited[1] = 0
     q = deque([1])
