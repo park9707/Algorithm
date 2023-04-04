@@ -1,0 +1,16 @@
+def solution(tickets):
+    routes = {}
+    for t in tickets:
+        routes[t[0]] = routes.get(t[0], []) + [t[1]]
+    for r in routes:
+        routes[r].sort(reverse=True)  # 도착지를 내림차순으로 정렬해놓음
+    stack = ["ICN"]
+    path = []
+    while len(stack) > 0:  # 스택이 다 빌 때 까지
+        top = stack[-1]  # 가장 마지막에 있는 지역
+        if top not in routes or len(routes[top]) == 0:  # 마지막에 있는 지역에서 출발하는 곳이 없거나 비어있는 경우
+            path.append(stack.pop())  # 경로에 더해 놓음
+        else:
+            stack.append(routes[top][-1])  # 갈 수 있는 곳이 있다면 스택에 추가
+            routes[top] = routes[top][:-1]  # 추가 한 지역을 빼는 슬라이싱
+    return path[::-1]  # 역순으로 반환
