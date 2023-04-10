@@ -1,0 +1,27 @@
+def solution(sequence, k):
+    sdx, edx = 1, 1
+    asdx, aedx = -1,-1
+    ln = int(1e9)
+
+    sequence = [0] + sequence  # 인덱스 1번부터 시작으로 표현
+    prefix_sum = [0] * len(sequence)  # 누적합 표현하기 위해 2차원 리스트 만들기
+
+    # prefix_sum 계산
+    for i in range(1, len(sequence)):
+        prefix_sum[i] = prefix_sum[i - 1] + sequence[i]  # 누적합 표현
+
+    while sdx <= edx < len(sequence):  # 오른쪽 인덱스가 왼쪽 인덱스보다 크거나 같고, sequence 범위 안이면 반복
+        check = prefix_sum[edx] - prefix_sum[sdx - 1]  # 누적합 빼기
+
+        if check < k:  # k보다 작으면
+            edx += 1  # 오른쪽 인덱스 값 +1
+        elif check == k:  # k와 같으면
+            if ln > edx - sdx:  # 인덱스 값 차이 비교 후 차이가 더 작으면
+                ln = edx-sdx  #ln에 담고
+                asdx, aedx = sdx, edx  # sdx와 edx 담기
+            edx += 1
+        else:  # k보다 크면
+            sdx += 1  # 왼쪽 인덱스 값 +1
+
+
+    return [asdx - 1, aedx - 1]
