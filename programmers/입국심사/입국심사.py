@@ -1,6 +1,6 @@
 def solution(n, times):
     answer = 0
-    left, right = 1, max(times) * n  # right 은 최악의 경우
+    left, right = 1, min(times) * n  # right 은 최악의 경우
     while left <= right:
         mid = (left + right) // 2
         people = 0
