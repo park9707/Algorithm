@@ -5,5 +5,3 @@ def solution(n, money):
         for i in range(m, n+1):
             answer[i] += answer[i-m]
     return answer[n]
-
-print(solution(5, [1, 2, 5]))
