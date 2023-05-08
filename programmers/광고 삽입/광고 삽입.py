@@ -17,7 +17,7 @@ def time_to_hour(time):
 def solution(play_time, adv_time, logs):
     play_time = time_to_sec(play_time)
     adv_time = time_to_sec(adv_time)
-    all_time = [0] * (play_time + 1)
+    all_time = [0] * (play_time + 2)
     n = len(all_time)
 
     for log in logs:
@@ -38,6 +38,6 @@ def solution(play_time, adv_time, logs):
     for i in range(adv_time + 1, n):
         if most_view < all_time[i] - all_time[i - adv_time]:
             most_view = all_time[i] - all_time[i - adv_time]
-            answer = i - (adv_time - 1)
+            answer = i - adv_time + 1
 
     return time_to_hour(answer)
