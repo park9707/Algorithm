@@ -1,6 +1,3 @@
-from collections import deque
-
-
 def solution(lines):
     answer = 1
     tmp = []
@@ -11,12 +8,11 @@ def solution(lines):
         tmp.append([round(t - nt + 0.001, 3), 1])
         tmp.append([round(t + 0.999, 3), 2])
 
-    q = deque(sorted(tmp))
+    arr = [i for v, i in sorted(tmp)]
     n = 0
 
-    while q:
-        a = q.popleft()
-        if a[1] == 1:
+    for i in arr:
+        if i == 1:
             n += 1
         else:
             n -= 1
