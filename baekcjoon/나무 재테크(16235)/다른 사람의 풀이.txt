@@ -1,0 +1,70 @@
+import sys
+input = sys.stdin.readline
+go = [(1,0),(0,1),(-1,0),(0,-1),(1,1),(-1,-1),(1,-1),(-1,1)]
+
+def spring_summer_winter():
+    for i in range(n):
+        for j in range(n):
+            if tree[i][j]:
+                dead_soil = 0
+                tree_ij = {}    # 임시로 나무 담기
+                no_soil = False     # 양분이 없으면 True 있으면 False
+                for age in sorted(tree[i][j].keys()):   # 나이가 낮은 순서대로
+                    total_tree = tree[i][j][age]
+                    if no_soil:  # 양분이 없다면
+                        dead_soil += total_tree * (age//2)
+                    elif soil[i][j] >= total_tree*age:  # 땅의 양분이 나무가 필요한 양분보다 많다면
+                        soil[i][j] -= total_tree*age  # 필요한 양분만큼 빼기
+                        tree_ij[age+1] = total_tree  # 나무 나이 +1
+                    else:
+                        no_soil = True  # 더 이상 양분 x
+                        alive_tree = soil[i][j]//age  # 같은 나이의 나무들 중 살 수 있는 나무
+                        dead_soil += (total_tree-alive_tree) * (age//2) # 살 수 있는 나무 뺀 나머지는 죽고 양분으로 바뀜
+                        if alive_tree>0:    # 살 수 있는 나무가 있다면
+                            soil[i][j] -= alive_tree*age    # 그 만큼 양분 빼기
+                            tree_ij[age+1] = alive_tree  # 나무 나이 +1
+                tree[i][j] = tree_ij    # 임시로 담은 것으로 바꾸기
+                soil[i][j] += dead_soil    # 죽은 나무의 양분만큼 더하기
+            soil[i][j] += add_soil[i][j]   # 겨울에 더하는 양분
+
+def fall():
+    for i in range(n):
+        for j in range(n):
+            new_tree = 0
+            for age in tree[i][j].keys():
+                if age%5 == 0:
+                    new_tree += tree[i][j][age]
+            if new_tree:
+                for di,dj in go:
+                    ni,nj = i+di,j+dj
+                    if 0 <= ni < n and 0 <= nj < n:
+                        if 1 in tree[ni][nj]:
+                            tree[ni][nj][1] += new_tree
+                        else:
+                            tree[ni][nj][1] = new_tree
+
+n,m,k = map(int,input().split())
+add_soil = [list(map(int,input().split())) for _ in range(n)]
+soil = [[5]*n for _ in range(n)]
+tree = [[{} for _ in range(n)] for _ in range(n)]
+for _ in range(m):
+    x,y,z = map(int,input().split())
+    tree[x-1][y-1][z] = 1   # 나이가 key 값
+while k>0:  # for _ in range(k) 와 다를 거 없는 것 같다.
+    k -= 1
+    # 1.봄:나이만큼 양분먹고, 나이 1증가
+    # 나무 여러개면 어린나무부터 양분먹기
+    # 2.여름:죽은 나무 나이//2 가 양분이 됨
+    # 4.겨울:로봇이 양분 추가
+    spring_summer_winter()
+
+    # 3.가을:나이가 5의배수인 나무가 번식
+    fall()
+
+ans = 0
+for i in range(n):
+    for j in range(n):
+        ans += sum(tree[i][j].values())
+print(ans)
+
+# 같은 나이의 나무는 딕셔너리를 이용하여 나이를 key로 하나로 합치고 value에 개수를 적어 연산을 줄임
