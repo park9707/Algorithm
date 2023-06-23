@@ -1,0 +1,54 @@
+import sys
+from collections import deque
+input = sys.stdin.readline
+
+Deltas = [(1, 0), (0, 1), (-1, 0), (0, -1)]
+
+N, M = map(int, input().split())
+cheese = list(list(map(int, input().split())) for _ in range(N))
+count = sum(map(sum, cheese))
+queue = deque()
+queue.append((0, 0))
+visited = [[0] * M for _ in range(N)]
+
+
+def bfs():
+    global count
+    new_queue = deque()
+    while queue:
+        y, x = queue.popleft()
+        for dy, dx in Deltas:
+            # := -> 파이썬 3.8부터 도입 된 할당 표현, 값을 할당하고 바로 반환
+            # 이동할 구역이 범위 안이고, 방문을 2 미만으로 했다면
+            if 0 <= (ny := y + dy) < N and 0 <= (nx := x + dx) < M and visited[ny][nx] < 2:
+                # 치즈면 실행
+                if cheese[ny][nx]:
+                    # 이 치즈를 방문한 적이 있다면
+                    if visited[ny][nx]:
+                        # 다시 방문 안하도록 2로 바꿈
+                        visited[ny][nx] = 2
+                        # 치즈를 녹임
+                        cheese[ny][nx] = 0
+                        count -= 1
+                        new_queue.append((ny, nx))
+                        continue
+                    visited[ny][nx] += 1
+                # 치즈가 아니라면
+                else:
+                    # 재방문 안하도록 2로 할당
+                    visited[ny][nx] = 2
+                    queue.append((ny, nx))
+    return new_queue
+
+
+time = 0
+while count:
+    time += 1
+    queue = bfs()
+
+print(time)
+
+# 치즈가 녹은 부분을 new_queue 에 담아서 리턴 후 그 지역부터 다시 도는 방법
+# 이미 1번 방문했던 치즈를 녹은 부분부터 시작해서 닿을 수 있으면
+# 2곳에서 방문할 수 있는 것이므로 한번 방문 했던 곳을 또 갈 필요가 없고 녹은 부분만 확인하면 된다.
+# 2번째 돌 때 부터 이미 한번 닿은 곳은 1로 되있기 때문에 가능
