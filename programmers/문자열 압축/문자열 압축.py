@@ -7,8 +7,8 @@ def solution(s):
         tmp = s[:i]
         
         for j in range(i, len(s), i):
-            if tmp==s[j:j+i]:
-                cnt+=1
+            if tmp == s[j:j+i]:
+                cnt += 1
             else:
                 if cnt == 1:
                     b += tmp
@@ -25,7 +25,3 @@ def solution(s):
         answer = min(answer, len(b))
     
     return answer
-
-s=input()
-
-print(solution(s))
