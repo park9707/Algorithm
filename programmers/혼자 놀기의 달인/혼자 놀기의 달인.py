@@ -10,7 +10,5 @@ def solution(cards):
             del boxes[pos]  # 박스에서 인덱스 pos 제거
             pos = temp  # pos에 다음 인덱스 값 담기
         groups.append(len(visited))  # 그룹의 길이 담기
-    groups.sort(reverse = True)  # 길이를 담은 groups를 내림차순으로 정렬
+    groups.sort(reverse=True)  # 길이를 담은 groups를 내림차순으로 정렬
     return groups[0] * groups[1] if len(groups) > 1 else 0  # 그룹이 2개 이상 나온다면 곱해서 리턴, 아니라면 0을 리턴
-
-print(solution([8,6,3,7,2,5,1,4]))
