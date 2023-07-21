@@ -12,4 +12,4 @@ def solution(begin, end):
         answer.append(a)
     return answer
 
-# 문제 수정 후 틀린 코드가 됨
+# 문제 수정 후 틀린 코드가 됐다.

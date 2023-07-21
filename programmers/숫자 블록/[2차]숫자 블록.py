@@ -14,4 +14,5 @@ def solution(begin, end):
                     num = i // j
                     break
         answer.append(num)
+
     return answer
