@@ -9,7 +9,7 @@ graph = []
 dx = [0, 0, 1, -1]
 dy = [1, -1, 0, 0]
 max_num = 0
-result = 1
+answer = 1
 for i in range(n):
     graph.append(list(map(int, input().rstrip().split())))
     tmp = max(graph[i])
@@ -39,6 +39,6 @@ for num in range(1, max_num+1):
                 dfs(x, y, num)
                 cnt += 1
 
-    result = max(result, cnt)
+    answer = max(answer, cnt)
 
-stdout.write(str(result))
+stdout.write(str(answer))

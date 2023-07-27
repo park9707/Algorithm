@@ -2,11 +2,11 @@ r, c = map(int, input().split())
 graph = [list(input()) for _ in range(r)]
 visited = set()
 dx, dy = (-1, 1, 0, 0), (0, 0, -1, 1)
-result = 0
+answer = 0
 
 
 def dfs(x, y, cnt):
-    global result
+    global answer
 
     result = max(result, cnt)
     visited.add(graph[x][y])
@@ -23,4 +23,4 @@ def dfs(x, y, cnt):
 
 dfs(0, 0, 1)
 
-print(result)
+print(answer)

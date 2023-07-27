@@ -8,7 +8,7 @@ data = [[False] * (n + 1) for _ in range(h + 1)]
 for _ in range(m):
     x, y = map(int, input().split())
     data[x][y] = True
-result = 4
+answer = 4
 
 
 def check(data):
@@ -28,7 +28,7 @@ def check(data):
 
 
 def dfs(depth, data, x, y):
-    global result
+    global answer
     if depth >= result:
         return
 
@@ -56,6 +56,6 @@ def dfs(depth, data, x, y):
 
 
 dfs(0, data, 1, 1)
-if result == 4:
-    result = -1
-print(result)
+if answer == 4:
+    answer = -1
+print(answer)

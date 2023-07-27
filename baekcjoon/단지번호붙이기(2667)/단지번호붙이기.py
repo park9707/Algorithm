@@ -9,7 +9,7 @@ for _ in range(n):
     graph.append(list(map(int, input().strip())))
 
 cnt = 0
-result = []
+answer = []
 
 dx = [0, 0, 1, -1]
 dy = [1, -1, 0, 0]
@@ -35,10 +35,10 @@ for i in range(n):
         if graph[i][j] == 1:
             cnt = 0
             dfs(i, j)
-            result.append(cnt)
+            answer.append(cnt)
 
-result.sort()
+answer.sort()
 
-stdout.write(str(len(result))+"\n")
-for i in result:
+stdout.write(str(len(answer)) + "\n")
+for i in answer:
     stdout.write(str(i)+"\n")

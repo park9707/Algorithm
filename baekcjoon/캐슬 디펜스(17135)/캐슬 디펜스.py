@@ -42,9 +42,9 @@ for archers in combinations(range(m), 3):
             if tmp[wave][archer] == 1:
                 remove.add((wave, archer))
             elif d > 1:
-                result = bfs(wave, archer, d-1)
-                if result:
-                    remove.add(result)
+                answer = bfs(wave, archer, d - 1)
+                if answer:
+                    remove.add(answer)
 
         for x, y in remove:
             tmp[x][y] = 0

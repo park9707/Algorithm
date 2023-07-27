@@ -6,7 +6,7 @@ n, l, r = map(int, input().rstrip().split())
 graph = [list(map(int, input().rstrip().split())) for _ in range(n)]
 dx = [0, 0, 1, -1]
 dy = [1, -1, 0, 0]
-result = 0
+answer = 0
 
 
 def bfs(x, y):
@@ -45,7 +45,7 @@ while True:
             if not visited[y][x]:
                 a = max(a, bfs(x, y))
     if a == 1:
-        print(result)
+        print(answer)
         break
     else:
-        result += 1
+        answer += 1

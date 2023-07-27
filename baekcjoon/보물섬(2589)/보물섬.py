@@ -7,7 +7,7 @@ m, n = map(int, input().rstrip().split())
 graph = [list(input().rstrip()) for _ in range(m)]
 dx = [0, 0, 1, -1]
 dy = [1, -1, 0, 0]
-result = []
+answer = []
 
 
 def bfs(x, y):
@@ -31,6 +31,6 @@ def bfs(x, y):
 for y in range(m):
     for x in range(n):
         if graph[y][x] == 'L':
-            result.append(bfs(x, y))
+            answer.append(bfs(x, y))
 
-print(max(result))
+print(max(answer))

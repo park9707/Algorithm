@@ -10,7 +10,7 @@ dx = [0, 0, 1, -1]
 dy = [1, -1, 0, 0]
 max_z = n*m
 z_cnt = 0
-result = 0
+answer = 0
 
 for i in graph:
     z_cnt += i.count(0)
@@ -47,7 +47,7 @@ while max_z != z_cnt:
         for y in range(1, n):
             if tmp_graph[y][x] > 0:
                 check(x, y)
-    result += 1
+    answer += 1
     if tmp_z == z_cnt:
         continue
 
@@ -59,7 +59,7 @@ while max_z != z_cnt:
                 dfs(x, y)
                 d += 1
     if d > 1:
-        print(result)
+        print(answer)
         break
 else:
     print(0)

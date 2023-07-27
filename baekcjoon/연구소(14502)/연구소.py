@@ -33,7 +33,7 @@ def bfs():
     for i in tmp_graph:
         cnt += i.count(0)
 
-    global result
+    global answer
     result = max(result, cnt)
 
 def make_wall(cnt):
@@ -50,7 +50,7 @@ def make_wall(cnt):
 
 
 graph = [list(map(int, input().rstrip().split())) for _ in range(n)]
-result = 0
+answer = 0
 make_wall(0)
 
-print(result)
+print(answer)
