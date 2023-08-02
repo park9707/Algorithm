@@ -2,21 +2,17 @@ import heapq
 
 
 def solution(operations):
-    max_heap = []
-    min_heap = []
+    heap = []
     for c, n in [op.split() for op in operations]:
         n = int(n)
         if c == 'I':
-            heapq.heappush(min_heap, n)
-            heapq.heappush(max_heap, -n)
+            heapq.heappush(heap, n)
         elif c == 'D':
-            if len(min_heap) == 0:
+            if not heap:
                 continue
             elif n < 0:
-                heapq.heappop(min_heap)
-                max_heap.pop()
+                heapq.heappop(heap)
             elif n > 0:
-                heapq.heappop(max_heap)
-                min_heap.pop()
+                heap.remove(max(heap))
 
-    return [0, 0] if not min_heap else [-max_heap[0], min_heap[0]]
+    return [0, 0] if not heap else [max(heap), heap[0]]
