@@ -26,5 +26,4 @@ def solution(n, computers):
     answer = set()
     for i in range(n):
         answer.add(find(i, parent))
-
     return len(answer)
