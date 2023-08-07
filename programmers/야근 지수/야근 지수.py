@@ -1,5 +1,6 @@
 import heapq
 
+
 def solution(n, works):
     if n >= sum(works):
         return 0
@@ -11,5 +12,3 @@ def solution(n, works):
         heapq.heappush(heap, num+1)
 
     return sum(m**2 for m in heap)
-
-print(solution(4, [4,3,3]))
