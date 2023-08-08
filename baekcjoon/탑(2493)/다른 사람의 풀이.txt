@@ -1,0 +1,18 @@
+import sys
+input = sys.stdin.readline
+
+n = int(input())
+top = list(map(int, input().split()))
+
+result = ['0'] * (n + 1)
+stack = []
+
+for i in range(n, 0, -1):
+    top_h = top[i-1]
+    while stack and stack[-1][0] < top_h:
+        h, idx = stack.pop()
+        result[idx] = str(i)
+    stack.append([top_h, i])
+
+print(" ".join(result[1:]))
+# stack 풀이
