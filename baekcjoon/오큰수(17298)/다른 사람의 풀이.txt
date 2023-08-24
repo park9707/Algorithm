@@ -1,0 +1,16 @@
+n = int(input())
+array = list(map(int, input().split()))
+stack = []
+# 왼쪽에서 부터 진행
+for i in range(n):
+    # 스택에 숫자가 들어있고 array[i]가 스택의 맨 뒤에 들어있는 숫자보다 크다면 pop으로 빼내고 그 인덱스의 값을 array[i]로 
+    while stack and array[i] > array[stack[-1]]:
+        array[stack.pop()] = array[i]
+    stack.append(i)
+# 오큰수가 없어서 스택에 남아있다면 -1 처리 
+while stack:
+    array[stack.pop()] = -1
+
+print(' '.join(map(str, array)))
+
+# 왼쪽부터 인덱스를 담아서 스택에 남아있다면(자기보다 큰 수를 못만났다면) 인덱스로 접근해서 비교 후 값을 넣는다.  
