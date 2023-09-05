@@ -5,19 +5,19 @@ n, s = map(int, input().rstrip().split())
 nums = list(map(int, input().rstrip().split()))
 
 l = r = 0
+answer = []
 num = nums[0]
-answer = float('inf')
 
-while l <= r:
-    if num < s:
+while r < n:
+    while s <= num:
+        num -= nums[l]
+        l += 1
+        if s > num:
+            answer.append(r - l + 2)
+    while num < s:
         r += 1
         if r == n:
             break
         num += nums[r]
-    else:
-        num -= nums[l]
-        l += 1
-        if num < s:
-            answer = min(answer, r - l + 2)
 
-print(answer if answer != float('inf') else 0)
+print(min(answer) if answer else 0)
