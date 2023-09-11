@@ -9,7 +9,7 @@ max_num = max(map(max, board))
 
 
 def dfs(x, y, depth, v):
-    global ans
+    global cnt
     # 현재 값에서 남은 깊이만큼 제일 높은 값을 곱해도 현재 ans보다 작으면 실행하지 않음
     if v + (4 - depth) * max_num < ans:
         return
@@ -32,11 +32,11 @@ def dfs(x, y, depth, v):
                 visited[nx][ny] = False
 
 
-ans = 0
+cnt = 0
 for i in range(n):
     for j in range(m):
         visited[i][j] = True
         dfs(i, j, 1, board[i][j])
         visited[i][j] = False
 
-print(ans)
+print(cnt)
