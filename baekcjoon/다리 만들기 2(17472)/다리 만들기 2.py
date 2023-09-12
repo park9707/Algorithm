@@ -74,7 +74,7 @@ def union(a, b):
     parents[b] = a
 
 
-cnt = 0
+ans = 0
 cnt = land_num - 1
 parents = [i for i in range(land_num)]
 while cnt:
@@ -82,10 +82,10 @@ while cnt:
         w, x, y = edges.pop()
         if find(x) != find(y):
             union(x, y)
-            cnt += w
+            ans += w
             cnt -= 1
     else:
-        cnt = -1
+        ans = -1
         break
 
-print(cnt)
+print(ans)
