@@ -69,9 +69,9 @@ for i in range(M):
     board[r][c] = (s, d, z)
 
 
-cnt = 0
+ans = 0
 for j in range(C):
-    cnt += fish(j)
+    ans += fish(j)
     move()
 
-print(cnt)
+print(ans)
