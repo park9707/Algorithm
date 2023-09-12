@@ -24,9 +24,9 @@ def dfs(x, y):
     return dp[y][x]
 
 
-cnt = 0
+ans = 0
 
 for i in range(n):
     for j in range(n):
-        cnt = max(cnt, dfs(j, i))
-print(cnt)
+        cnt = max(ans, dfs(j, i))
+print(ans)
