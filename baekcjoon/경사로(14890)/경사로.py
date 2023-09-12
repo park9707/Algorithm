@@ -3,7 +3,7 @@ input = sys.stdin.readline
 
 n, l = map(int, input().split())
 maps = [list(map(int, input().split())) for _ in range(n)]
-cnt = 0
+ans = 0
 
 
 def check_row(i):
@@ -70,10 +70,10 @@ def check_col(i):
 
 stair = [[0] * n for _ in range(n)]
 for i in range(n):
-    cnt += check_row(i)
+    ans += check_row(i)
 
 stair = [[0] * n for _ in range(n)]
 for i in range(n):
-    cnt += check_col(i)
+    ans += check_col(i)
 
-print(cnt)
+print(ans)
