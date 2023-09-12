@@ -30,7 +30,7 @@ def check(x, y, t):
                     check(nx, ny, t)
 
 
-cnt = t = 0
+ans = t = 0
 while cnt:
     arr = set()
     c = defaultdict(int)
@@ -41,6 +41,6 @@ while cnt:
     for x, y in arr:
         maps[x][y] = 0
 
-    cnt += 1
+    ans += 1
 
-print(cnt)
+print(ans)
