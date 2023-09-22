@@ -1,13 +1,11 @@
 import sys
 input = sys.stdin.readline
-
-t = int(input().rstrip())
+print = sys.stdout.write
 
 
 def find(x):
-    if parents[x] == x:
-        return x
-    parents[x] = find(parents[x])
+    if parents[x] != x:
+        parents[x] = find(parents[x])
     return parents[x]
 
 
@@ -27,6 +25,8 @@ def check(x):
         return find(x)
 
 
+t = int(input().rstrip())
+
 for _ in range(t):
     f = int(input().rstrip())
     parents = dict()
@@ -36,6 +36,7 @@ for _ in range(t):
 
         a_parents = check(a)
         b_parents = check(b)
+
         union(a_parents, b_parents)
 
-        print(friends[a_parents])
+        print(str(friends[a_parents]) + '\n')
