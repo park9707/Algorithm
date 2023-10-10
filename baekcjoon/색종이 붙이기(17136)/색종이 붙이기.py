@@ -12,9 +12,7 @@ for _ in range(10):
 if cnt == 0:
     print(0)
     exit(0)
-# elif cnt == 100:
-#     print(4)
-#     exit(0)
+
 confetti = [5] * 5
 score = [1, 4, 9, 16, 25]
 ans = float('inf')
