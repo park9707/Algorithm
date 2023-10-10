@@ -22,7 +22,7 @@ def solution():
 
     def dfsProc(y, x, currPaperCnt):
         global globalPaperCnt
-        # x, y가 0이라면 반복
+        # [x][y]가 0이라면 반복
         while not board[y][x]:
             x += 1
             if x >= 10:
