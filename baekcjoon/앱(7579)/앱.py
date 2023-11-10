@@ -10,11 +10,10 @@ dp = [[0] * (total_cost + 1) for _ in range(n + 1)]
 ans = float('inf')
 
 for i in range(1, n + 1):
-    for j in range(total_cost + 1):
-        if j < cost[i]:
-            dp[i][j] = dp[i-1][j]
-        else:
-            dp[i][j] = max(dp[i-1][j], memories[i] + dp[i-1][j-cost[i]])
+    for j in range(cost[i]):
+        dp[i][j] = dp[i-1][j]
+    for j in range(cost[i], total_cost + 1):
+        dp[i][j] = max(dp[i-1][j], memories[i] + dp[i-1][j-cost[i]])
 
         if m <= dp[i][j]:
             ans = min(ans, j)
