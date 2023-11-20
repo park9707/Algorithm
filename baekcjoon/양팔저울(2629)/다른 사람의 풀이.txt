@@ -1,0 +1,28 @@
+import sys
+
+n = int(sys.stdin.readline())
+weights = list(map(int, sys.stdin.readline().split()))
+m = int(sys.stdin.readline())
+marbles = list(map(int, sys.stdin.readline().split()))
+
+check = set()
+
+for w in weights:
+    # 이 부분이 다르다. check를 복사하는게 아닌, w를 새로 만든 set에 담고 check를 돌면서 new에 추가하고
+    # 뒤에서 check를 check.union(new) 로 합집합을 만든다.
+    new = set({w})
+    for _w in check:
+        new.add(abs(_w - w))
+        new.add(_w + w)
+
+    check = check.union(new)
+
+answer = []
+
+for marble in marbles:
+    if marble in check:
+        answer.append("Y")
+    else:
+        answer.append("N")
+
+print(*answer)
