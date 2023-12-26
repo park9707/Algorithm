@@ -1,6 +1,3 @@
-from collections import deque
-
-
 def solution(land):
     n, m = len(land), len(land[0])
     visited = [[False] * m for _ in range(n)]
@@ -10,13 +7,13 @@ def solution(land):
     for j in range(m):
         for i in range(n):
             if land[i][j] and not visited[i][j]:
-                q = deque([[i, j]])
+                q = [[i, j]]
                 cnt = 0
                 r = j
                 visited[i][j] = True
                 while q:
                     cnt += 1
-                    x, y = q.popleft()
+                    x, y = q.pop()
 
                     for dx, dy in move:
                         nx = x + dx
