@@ -95,3 +95,6 @@ while True:
     gravity()
 
 print(score)
+
+# 제출해보니 메모리와 속도 1등
+# 코드 길이는 최고는 아니지만 양호한 편
