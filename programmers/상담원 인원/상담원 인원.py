@@ -7,10 +7,9 @@ def solution(k, n, reqs):
     consulting = [[] for _ in range(k)]
     for a, b, c in reqs:
         consulting[c-1].append([a, b])
-    types_num = len(consulting)
-    waiting_times = [[0] * (n - types_num + 1) for _ in range(types_num)]
+    waiting_times = [[0] * (n - k + 1) for _ in range(k)]
 
-    for i in range(types_num):
+    for i in range(k):
         if not consulting[i]:
             continue
         for j in range(len(waiting_times[0])):
@@ -34,7 +33,7 @@ def solution(k, n, reqs):
             if waiting_t == 0:
                 break
 
-    for p in product(range(1, n - types_num + 2), repeat=types_num):
+    for p in product(range(1, n - k + 2), repeat=k):
         if sum(p) == n:
             temp = 0
             for i, num in enumerate(p):
