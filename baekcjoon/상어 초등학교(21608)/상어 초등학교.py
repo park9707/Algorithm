@@ -22,6 +22,8 @@ for _ in range(n):
     arr.append(num)
 board[1][1] = arr[0]
 location[arr[0]] = [1, 1]
+del empty[1, 1]
+
 for x, y in [[0, 1], [1, 0], [2, 1], [1, 2]]:
     empty[x, y] -= 1
 
@@ -34,11 +36,9 @@ for i in arr[1:]:
                 nx, ny = x + dx, y + dy
                 if 0 <= nx < N and 0 <= ny < N and not board[nx][ny]:
                     temp[nx, ny] += 1
-    print(temp)
     if temp:
         v = 0
         for tx, ty in sorted(temp.keys()):
-            print(tx, ty)
             if temp[tx, ty] > v:
                 x, y, v = tx, ty, temp[tx, ty]
             elif temp[tx, ty] == v and empty[tx, ty] > empty[x, y]:
@@ -46,7 +46,7 @@ for i in arr[1:]:
     else:
         x, y, v = N-1, N-1, -1
         for a, b in empty.keys():
-            if empty[a, b] > v and not board[a][b]:
+            if empty[a, b] > v:
                 x, y, v = a, b, empty[a, b]
                 if v == 4:
                     break
@@ -59,18 +59,13 @@ for i in arr[1:]:
         if 0 <= nx < N and 0 <= ny < N:
             connection[board[nx][ny]][i] = 1
             connection[i][board[nx][ny]] = 1
-            print(empty)
-            print(empty.get(nx, ny), nx, ny)
-            print(empty.get(nx, ny))
-            if empty.get(nx, ny):
-                print(nx, ny)
+            if empty.get((nx, ny), False):
                 empty[nx, ny] -= 1
-    print(board)
 
 ans = 0
 score = {0: 0, 1: 1, 2: 10, 3: 100, 4: 1000}
 for a in arr:
-    num = sum(connection[a][p] for p in favorite[a])
+    num = sum(connection[a][f] for f in favorite[a])
     ans += score[num]
 
 print(ans)
