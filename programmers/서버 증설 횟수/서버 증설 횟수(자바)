@@ -1,0 +1,28 @@
+import java.util.ArrayDeque;
+import java.util.Deque;
+
+class Solution {
+    public int solution(int[] players, int m, int k) {
+        Deque<Integer> server = new ArrayDeque<Integer>();
+        int ans = 0;
+        for (int i = 0; i < 24; i++) {
+            int n = players[i];
+            if (n == 0) {
+                continue;
+            }
+            while (!server.isEmpty() && server.peekFirst() <= i) {
+                server.pollFirst();
+            }
+
+            int s = n / m;
+            int serverSize = server.size();
+            if (serverSize < s) {
+                ans += s - serverSize;
+                for (int j = 0; j < s - serverSize; j++) {
+                    server.offerLast(i + k);
+                }
+            }
+        }
+        return ans;
+    }
+}
