@@ -1,0 +1,43 @@
+import java.util.*;
+
+class Solution {
+    public int solution(int[][] info, int n, int m) {
+        int answer = 0;
+        Map<Integer, Integer> stuff = new HashMap<>();
+        stuff.put(0, 0);
+
+        for (int[] pair : info) {
+            int a = pair[0];
+            int b = pair[1];
+            Map<Integer, Integer> newStuff = new HashMap<>();
+
+            for (Map.Entry<Integer, Integer> entry : stuff.entrySet()) {
+                int aa = entry.getKey();
+                int bb = entry.getValue();
+
+                if (a + aa < n) {
+                    int key = a + aa;
+                    int v = bb;
+                    if (newStuff.containsKey(key)) {
+                        v = Math.min(newStuff.get(key), bb);
+                    }
+                    newStuff.put(key, v);
+                }
+
+                if (b + bb < m) {
+                    int key = aa;
+                    int v = b + bb;
+                    if (newStuff.containsKey(key)) {
+                        v = Math.min(newStuff.get(key), b + bb);
+                    }
+                    newStuff.put(key, v);
+                }
+            }
+            stuff = newStuff;
+        }
+        if (stuff.isEmpty()) {
+            return -1;
+        }
+        return Collections.min(stuff.keySet());
+    }
+}
